@@ -141,7 +141,7 @@ function Cameroon(props: Props) {
         <section className="py-8 px-6">
           <div className="container mx-auto">
             <h2 className="text-2xl font-bold text-center mb-8">
-              Ma Chaîne YouTube
+              Quelques vidéos pour en savoir plus
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {sources.map((source, index) => {
