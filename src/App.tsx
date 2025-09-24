@@ -1,5 +1,12 @@
 import  { useState, useEffect } from 'react';
-import { ChevronDown, MapPin, Users, Music, Globe, Sparkles, X } from 'lucide-react';
+import Header from './components/header';
+import Home from './components/home';
+import Identity from './components/identity';
+import Culture from './components/culture';
+import Cameroon from './components/cameroon';
+import InterCultural from './components/inter-culture';
+import Conclusion from './components/conclusion';
+import ModalCarousel from './components/modal-carrousel';
 
 const App = () => {
   const [activeSection, setActiveSection] = useState('home');
@@ -115,222 +122,25 @@ const App = () => {
   return (
     <div className="font-sans text-gray-800 min-h-screen min-w-screen">
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-sm shadow-sm">
-        <div className="container mx-auto px-4 py-3 flex justify-between items-center">
-          <h1 className="text-xl font-bold text-emerald-800">Mon portrait culturel</h1>
-          <div className="hidden md:flex space-x-6">
-            {[
-              { id: 'home', label: 'Accueil' },
-              { id: 'identity', label: 'Identité' },
-              { id: 'culture', label: 'Culture' },
-              { id: 'cameroon', label: 'Cameroun' },
-              { id: 'intercultural', label: 'Interculturel' },
-              { id: 'conclusion', label: 'Conclusion' },
-            ].map((item) => (
-              <button
-                key={item.id}
-                onClick={() => scrollToSection(item.id)}
-                className={`font-medium transition-colors ${
-                  activeSection === item.id ? 'text-emerald-700' : 'text-gray-600 hover:text-emerald-600'
-                }`}
-              >
-                {item.label}
-              </button>
-            ))}
-          </div>
-        </div>
-      </nav>
+      <Header activeSection={activeSection} scrollToSection={scrollToSection} />
 
       {/* Home Section */}
-      <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
-        <div
-          className="absolute inset-0 bg-cover bg-center z-0"
-        />
-        <div className="absolute inset-0 bg-black/50 z-10"></div>
-        <div className="container mx-auto px-4 text-center  z-20">
-          <h1 className="text-4xl md:text-6xl font-bold mb-4">Mon portrait culturel – Fono Colince</h1>
-          <p className="text-xl md:text-2xl mb-8 italic">
-            « La culture est l’âme d’un peuple. »
-          </p>
-          <button
-            onClick={() => scrollToSection('identity')}
-            className="bg-green-600 hover:bg-green-700 px-6 py-3 rounded-full font-semibold flex items-center mx-auto transition-all"
-          >
-            Découvrir mon parcours <ChevronDown className="ml-2" />
-          </button>
-        </div>
-      </section>
+      <Home scrollToSection={scrollToSection} />
 
       {/* Identity Section */}
-      <section id="identity" className="py-20 bg-amber-50">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-emerald-800 mb-4 flex items-center justify-center gap-2">
-              <Users className="text-emerald-600" /> Mon identité personnelle
-            </h2>
-            <p className="text-gray-600 max-w-3xl mx-auto">
-              Comment la socialisation familiale et communautaire a façonné qui je suis.
-            </p>
-          </div>
-
-          <div className="max-w-4xl mx-auto space-y-8">
-            {[
-              {
-                title: "Enfance au Cameroun",
-                content: "Né dans une famille soudée, j’ai grandi entouré de mes grands-parents, piliers de sagesse et de traditions.",
-                image: "/enfance.png"
-              },
-              {
-                title: "Transmission des valeurs",
-                content: "Respect, solidarité, spiritualité — ces valeurs m’ont été transmises à travers les contes, les cérémonies et le quotidien.",
-                image: "/transmission_valeur.png"
-              }
-            ].map((item, index) => (
-              <div key={index} className="flex flex-col md:flex-row items-center gap-6 bg-white p-6 rounded-xl shadow-md">
-                <img src={item.image} alt={item.title} className="w-full md:w-1/3 h-48 rounded-lg" />
-                <div className="md:w-2/3 text-center md:text-left">
-                  <h3 className="text-xl font-semibold text-emerald-700">{item.title}</h3>
-                  <p className="mt-2 text-gray-700">{item.content}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <Identity />
 
       {/* Culture Section */}
-      <section id="culture" className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-emerald-800 mb-4 flex items-center justify-center gap-2">
-              <Music className="text-emerald-600" /> Ma culture
-            </h2>
-            <p className="text-gray-600 max-w-3xl mx-auto">
-              Danses, musiques, cérémonies, habits et plats typiques : la richesse vivante de mes racines.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            {cultureItems.map((item, i) => (
-              <div
-                key={i}
-                onClick={() => openCarousel(i)}
-                className="group cursor-pointer overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-shadow"
-              >
-                <img src={item.images[0].src} alt={item.title} className="w-full h-64" />
-                <div className="bg-emerald-100 p-4 text-center">
-                  <h3 className="font-bold text-emerald-800 group-hover:text-emerald-600 transition-colors">
-                    {item.title}
-                  </h3>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <Culture openCarousel={openCarousel} cultureItems={cultureItems} />
 
       {/* Cameroon Section */}
-      <section id="cameroon" className="py-20 bg-emerald-50">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-emerald-800 mb-4 flex items-center justify-center gap-2">
-              <MapPin className="text-emerald-600" /> Le Cameroun : l’Afrique en miniature
-            </h2>
-            <p className="text-gray-600 max-w-3xl mx-auto">
-              Un pays de diversité linguistique, culinaire, musicale et sportive.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
-            {[
-              { label: "250+ langues", icon: "🗣️" },
-              { label: "Makossa & Bikutsi", icon: "🎶" },
-              { label: "Cuisine variée", icon: "🍲" },
-              { label: "Passion du football", icon: "⚽" },
-            ].map((item, i) => (
-              <div key={i} className="bg-white p-6 rounded-xl text-center shadow-sm hover:shadow-md transition-shadow">
-                <div className="text-4xl mb-2">{item.icon}</div>
-                <p className="font-medium text-gray-700">{item.label}</p>
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-12 flex flex-wrap gap-4 text-center">
-            <img
-              src="https://live.staticflickr.com/2099/1646625539_b79b9f2ae2_b.jpg"
-              alt="Paysages du Cameroun"
-              className="mx-auto rounded-xl shadow-lg  h-100"
-            />
-            <img
-              src="https://th.bing.com/th/id/OIP.lFjDT9AMuluSi3pAAii-bQHaE7"
-              alt="Paysages du Cameroun"
-              className=" rounded-xl shadow-lg  h-100"
-            />
-            <img
-              src="https://th.bing.com/th/id/OIP.Kt97ifgrSkMNlZNXYG2OsQHaE7"
-              alt="Paysages du Cameroun"
-              className="mx-auto rounded-xl shadow-lg  h-100"
-            />
-            
-          </div>
-        </div>
-      </section>
+      <Cameroon />
 
       {/* Intercultural Section */}
-      <section id="intercultural" className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-emerald-800 mb-4 flex items-center justify-center gap-2">
-              <Globe className="text-emerald-600" /> Mon ouverture interculturelle
-            </h2>
-            <p className="text-gray-600 max-w-3xl mx-auto">
-              Construire une identité biculturelle entre le Cameroun et la France.
-            </p>
-          </div>
-
-          <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-8">
-            <div className="bg-blue-50 p-6 rounded-xl border border-blue-200">
-              <h3 className="text-xl font-bold text-blue-700 mb-4 text-center">Ma culture d’origine</h3>
-              <ul className="space-y-2 text-gray-700">
-                <li>• Communication indirecte et respectueuse</li>
-                <li>• Famille élargie comme pilier social</li>
-                <li>• Temps flexible, relationnel</li>
-                <li>• Nourriture partagée, conviviale</li>
-              </ul>
-            </div>
-            <div className="bg-rose-50 p-6 rounded-xl border border-rose-200">
-              <h3 className="text-xl font-bold text-rose-700 mb-4 text-center">Culture française</h3>
-              <ul className="space-y-2 text-gray-700">
-                <li>• Communication directe et claire</li>
-                <li>• Indépendance individuelle valorisée</li>
-                <li>• Ponctualité et organisation</li>
-                <li>• Repas structurés, gastronomie raffinée</li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="mt-10 text-center">
-            <img
-              src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&auto=format&fit=crop&w=700&q=80"
-              alt="Vie étudiante en France"
-              className="mx-auto rounded-xl shadow-md"
-            />
-          </div>
-        </div>
-      </section>
+      <InterCultural />
 
       {/* Conclusion */}
-      <section id="conclusion" className="py-20 bg-gradient-to-br from-emerald-700 to-emerald-900 text-white">
-        <div className="container mx-auto px-4 text-center">
-          <div className="mb-8">
-            <Sparkles className="w-16 h-16 mx-auto text-yellow-300" />
-          </div>
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">Conclusion</h2>
-          <blockquote className="text-xl md:text-2xl italic max-w-3xl mx-auto mb-8 leading-relaxed">
-            « Mon identité est un pont entre deux mondes — enrichi par mes racines, ouvert au dialogue des cultures. »
-          </blockquote>
-        </div> 
-      </section>
+      <Conclusion />
 
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-6 text-center">
@@ -339,62 +149,15 @@ const App = () => {
 
       {/* Carousel Modal */}
       {carouselOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4">
-          <div className="relative w-full max-w-4xl">
-            <button
-              onClick={closeCarousel}
-              className="absolute -top-12 right-0 bg-black/50 rounded-full p-2 hover:bg-black"
-            >
-              <X size={24} />
-            </button>
-
-            <div className="bg-white rounded-xl overflow-hidden shadow-2xl">
-              <div className="bg-emerald-800 text-white p-4 text-center">
-                <h3 className="text-xl font-bold">{cultureItems[currentItemIndex].title}</h3>
-                <p className="text-emerald-200 text-sm">{cultureItems[currentItemIndex].subtitle}</p>
-              </div>
-
-              <div className="h-80 md:h-96 relative overflow-hidden">
-                <img
-                  src={cultureItems[currentItemIndex].images[currentImageIndex]?.src || ''}
-                  alt="Culture detail"
-                  className="w-full h-full"
-                />
-                <div className="absolute bottom-0 left-0 right-0 bg-black/70 text-white p-3 text-sm opacity-0 group-hover:opacity-100 hover:opacity-100 transition-opacity">
-                  {cultureItems[currentItemIndex].images[currentImageIndex]?.caption}
-                </div>
-              </div>
-
-              <div className="p-4 flex justify-between items-center">
-                <button
-                  onClick={prevImage}
-                  className="px-4 py-2 bg-emerald-100 text-emerald-800 rounded hover:bg-emerald-200"
-                >
-                  Précédent
-                </button>
-
-                <div className="flex space-x-2">
-                  {cultureItems[currentItemIndex].images.map((_, idx) => (
-                    <button
-                      key={idx}
-                      onClick={() => setCurrentImageIndex(idx)}
-                      className={`w-3 h-3 rounded-full ${
-                        idx === currentImageIndex ? 'bg-emerald-600' : 'bg-gray-300'
-                      }`}
-                    />
-                  ))}
-                </div>
-
-                <button
-                  onClick={nextImage}
-                  className="px-4 py-2 bg-emerald-100 text-emerald-800 rounded hover:bg-emerald-200"
-                >
-                  Suivant
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
+        <ModalCarousel
+          cultureItems={cultureItems}
+          currentItemIndex={currentItemIndex}
+          currentImageIndex={currentImageIndex}
+          closeCarousel={closeCarousel}
+          nextImage={nextImage}
+          prevImage={prevImage}
+          setCurrentImageIndex={setCurrentImageIndex}
+        />
       )}
     </div>
   );
