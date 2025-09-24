@@ -7,6 +7,7 @@ import Cameroon from './components/cameroon';
 import InterCultural from './components/inter-culture';
 import Conclusion from './components/conclusion';
 import ModalCarousel from './components/modal-carrousel';
+import MySocialization from './components/my-socialization';
 
 const App = () => {
   const [activeSection, setActiveSection] = useState('home');
@@ -85,6 +86,7 @@ const App = () => {
   }, []);
 
   const scrollToSection = (id:string) => {
+    setActiveSection(id);
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
   };
 
@@ -133,11 +135,15 @@ const App = () => {
       {/* Culture Section */}
       <Culture openCarousel={openCarousel} cultureItems={cultureItems} />
 
+
       {/* Cameroon Section */}
       <Cameroon />
 
       {/* Intercultural Section */}
       <InterCultural />
+
+      {/* My Socialization Section */}
+      <MySocialization />
 
       {/* Conclusion */}
       <Conclusion />

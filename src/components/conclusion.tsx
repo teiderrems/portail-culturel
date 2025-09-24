@@ -8,7 +8,7 @@ function Conclusion(props: Props) {
   return (
     <section
       id="conclusion"
-      className="py-20 bg-gradient-to-br from-emerald-700 to-emerald-900 text-white"
+      className="py-20 bg-gradient-to-br  from-emerald-700 to-emerald-900 text-white"
     >
       <div className="container mx-auto px-4 text-center">
         <div className="mb-8">
