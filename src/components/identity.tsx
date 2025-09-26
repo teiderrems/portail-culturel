@@ -1,9 +1,16 @@
+"use client";
+import { useState } from "react";
 import { Users } from "lucide-react";
+import EnfanceNarration from "./EnfanceNarration";
+import TransmissionNarration from "./TransmissionNarration";
 
 interface Props {}
 
 function Identity(props: Props) {
   const {} = props;
+
+  const [showEnfance, setShowEnfance] = useState(false);
+  const [showTransmission, setShowTransmission] = useState(false);
 
   return (
     <section id="identity" className="py-20 bg-amber-50 ">
@@ -19,39 +26,55 @@ function Identity(props: Props) {
         </div>
 
         <div className="max-w-4xl mx-auto space-y-8">
-          {[
-            {
-              title: "Enfance au Cameroun",
-              content:
-                "Né dans une famille soudée, j’ai grandi entouré de mes grands-parents, piliers de sagesse et de traditions.",
-              image: "/enfance.png",
-            },
-            {
-              title: "Transmission des valeurs",
-              content:
-                "Respect, solidarité, spiritualité — ces valeurs m’ont été transmises à travers les contes, les cérémonies et le quotidien.",
-              image: "/transmission_valeur.png",
-            },
-          ].map((item, index) => (
-            <div
-              key={index}
-              className="flex flex-col md:flex-row items-center gap-6 bg-white p-6 rounded-xl shadow-md"
-            >
-              <img
-                src={item.image}
-                alt={item.title}
-                className="w-full md:w-1/3 h-48 rounded-lg"
-              />
-              <div className="md:w-2/3 text-center md:text-left">
-                <h3 className="text-xl font-semibold text-emerald-700">
-                  {item.title}
-                </h3>
-                <p className="mt-2 text-gray-700">{item.content}</p>
-              </div>
+          {/* Carte Enfance */}
+          <button
+            onClick={() => setShowEnfance(true)}
+            className="w-full flex flex-col md:flex-row items-center gap-6 bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition"
+          >
+            <img
+              src="/enfance.png"
+              alt="Enfance au Cameroun"
+              className="w-full md:w-1/3 h-48 rounded-lg"
+            />
+            <div className="md:w-2/3 text-center md:text-left">
+              <h3 className="text-xl font-semibold text-emerald-700">
+                Enfance au Cameroun
+              </h3>
+              <p className="mt-2 text-gray-700">
+                Né dans une famille soudée, j’ai grandi entouré de mes
+                grands-parents, piliers de sagesse et de traditions.
+              </p>
             </div>
-          ))}
+          </button>
+
+          {/* Carte Transmission */}
+          <button
+            onClick={() => setShowTransmission(true)}
+            className="w-full flex flex-col md:flex-row items-center gap-6 bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition"
+          >
+            <img
+              src="/transmission_valeur.png"
+              alt="Transmission des valeurs"
+              className="w-full md:w-1/3 h-48 rounded-lg"
+            />
+            <div className="md:w-2/3 text-center md:text-left">
+              <h3 className="text-xl font-semibold text-emerald-700">
+                Transmission des valeurs
+              </h3>
+              <p className="mt-2 text-gray-700">
+                Respect, solidarité, spiritualité — ces valeurs m’ont été
+                transmises à travers les contes, les cérémonies et le quotidien.
+              </p>
+            </div>
+          </button>
         </div>
       </div>
+
+      {/* Popups */}
+      {showEnfance && <EnfanceNarration onClose={() => setShowEnfance(false)} />}
+      {showTransmission && (
+        <TransmissionNarration onClose={() => setShowTransmission(false)} />
+      )}
     </section>
   );
 }

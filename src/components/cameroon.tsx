@@ -201,8 +201,8 @@ function Cameroon(props: Props) {
         {/* Video Preview Modal */}
         {previewingVideo && (
           <div className="fixed inset-0 bg-opacity-75 flex items-center justify-center z-50 p-4">
-            <div className="absolute inset-0 bg-gray-400/50  z-100"></div>
-            <div onClick={closePreview} className="bg-white rounded-lg max-w-4xl w-full z-200 max-h-[90vh] overflow-y-auto">
+            <div className="absolute inset-0 bg-gray-400/50  z-100 hover:cursor-pointer" onClick={closePreview} ></div>
+            <div className="bg-white rounded-lg max-w-4xl w-full z-200 max-h-[90vh] overflow-y-auto">
               {/* <div className="p-4 border-b border-gray-200 flex justify-between items-center">
                 <h3 className="text-xl font-bold">
                   Prévisualisation de la vidéo

@@ -122,7 +122,7 @@ const App = () => {
   }, [carouselOpen, currentItemIndex, currentImageIndex]);
 
   return (
-    <div className="font-sans text-gray-800 min-h-screen min-w-screen">
+    <div className="font-sans text-gray-800 min-h-screen w-screen max-w-screen">
       {/* Navigation */}
       <Header activeSection={activeSection} scrollToSection={scrollToSection} />
 
